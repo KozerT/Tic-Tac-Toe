@@ -1,19 +1,18 @@
 import "./App.css";
+import Player from "./components/Player";
 
 function App() {
   return (
     <>
-      <h1>Tic-Tac-Toe: The Ultimate Challenge</h1>
+      <h1>Tic-Tac-Toe</h1>
+      <h2>The Ultimate Challenge</h2>
       <div id="game-container">
         <ol id="players">
-          <li>
-            <span className="player-name">Player1</span>
-            <span className="player-name">Player2</span>
-          </li>
-          <li></li>
+          <Player name="Player 1" symbol="X" />
+          <Player name="Player 2" symbol="O" />
         </ol>
+        GAME BOARD
       </div>
-      LOG
     </>
   );
 }
