@@ -76,6 +76,16 @@ h2 {
   box-shadow: 0 0 1px 1px var(--main-white-color);
 }
 
+.players li.active {
+  border-color: #f6e35a;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.players li.active .player-name,
+.players li.active .player-symbol {
+  color: #f6e35a;
+}
+
 .player--main--button {
   width: 3rem;
   border: none;
@@ -103,7 +113,7 @@ h2 {
   display: inline-block;
   width: 6rem;
   font-size: 1rem;
-  color: #e1dec7;
+
   text-transform: uppercase;
   margin: 0;
   padding: 0.5rem;
@@ -132,7 +142,6 @@ h2 {
 .player-symbol {
   margin-left: 1rem;
   font-size: 1rem;
-  color: #e1dec7;
 }
 
 ol {

@@ -1,32 +1,29 @@
-import { useState } from "react";
-
 const initialGameBoardValue = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
 ];
 
-const GameBoard = () => {
-  const [gameBoard, setGameBoard] = useState(initialGameBoardValue);
+const GameBoard = ({ onSelectInput, turns }) => {
+  let gameBoard = initialGameBoardValue;
 
-  const handleSelectButton = (rowIndex, colIndex) => {
-    setGameBoard((prev) => {
-      const updatedBoard = [...prev.map((innerArray) => [...innerArray])];
-      updatedBoard[rowIndex][colIndex] = "X";
-      return updatedBoard;
-    });
-  };
+  for (const turn of turns) {
+    const { square, player } = turn;
+    const { row, col } = square;
+
+    gameBoard[row][col] = player;
+  }
 
   return (
     <ol id="game-board" className="game-board">
       {gameBoard.map((row, rowIndex) => (
         <li key={rowIndex}>
           <ol>
-            {row.map((symbol, rowIndex) => (
-              <li key={rowIndex}>
+            {row.map((symbol, colIndex) => (
+              <li key={colIndex}>
                 <button
                   className="game-board--main--button"
-                  onClick={() => handleSelectButton(rowIndex, rowIndex)}
+                  onClick={() => onSelectInput(rowIndex, colIndex)}
                 >
                   {symbol}
                 </button>
