@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 
 const initialGameBoardValue = [
   [null, null, null],
@@ -7,14 +7,29 @@ const initialGameBoardValue = [
 ];
 
 const GameBoard = () => {
+  const [gameBoard, setGameBoard] = useState(initialGameBoardValue);
+
+  const handleSelectButton = (rowIndex, colIndex) => {
+    setGameBoard((prev) => {
+      const updatedBoard = [...prev.map((innerArray) => [...innerArray])];
+      updatedBoard[rowIndex][colIndex] = "X";
+      return updatedBoard;
+    });
+  };
+
   return (
     <ol id="game-board" className="game-board">
-      {initialGameBoardValue.map((row, index) => (
-        <li key={index}>
+      {gameBoard.map((row, rowIndex) => (
+        <li key={rowIndex}>
           <ol>
-            {row.map((symbol, index) => (
-              <li key={index}>
-                <button className="game-board--main--button">{symbol}</button>
+            {row.map((symbol, rowIndex) => (
+              <li key={rowIndex}>
+                <button
+                  className="game-board--main--button"
+                  onClick={() => handleSelectButton(rowIndex, rowIndex)}
+                >
+                  {symbol}
+                </button>
               </li>
             ))}
           </ol>
