@@ -24,6 +24,7 @@ const GameBoard = ({ onSelectInput, turns }) => {
                 <button
                   className="game-board--main--button"
                   onClick={() => onSelectInput(rowIndex, colIndex)}
+                  disabled={symbol !== null}
                 >
                   {symbol}
                 </button>
