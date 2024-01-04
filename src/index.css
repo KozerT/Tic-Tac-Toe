@@ -182,3 +182,53 @@ ol {
   cursor: pointer;
   padding: 1rem;
 }
+
+.game-over {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(40, 40, 37, 0.95);
+  animation: pop-in 0.5s cubic-bezier(0.68, -0.55, 0.65, 0.52) forwards;
+  border-top-left-radius: 225px 15px;
+  border-top-right-radius: 225px 15px;
+  border-bottom-right-radius: 225px 15px;
+  border-bottom-left-radius: 225px 15px;
+}
+
+.game-over__text__main {
+  text-align: center;
+  font-size: 4rem;
+  margin: 0;
+}
+
+.game-over__text__paragraph {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.game-over__button {
+  display: block;
+  margin: 2rem auto;
+  font-size: 1.5rem;
+  background: none;
+  border: 2px solid #fcd256;
+  color: #fcd256;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s, color 0.2s;
+  box-shadow: 0 0 8px rgba(255, 187, 0, 0.4);
+}
+
+.game-over__button:hover {
+  background: #fcd256;
+  color: #3f3b00;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 187, 0, 0.8);
+}
