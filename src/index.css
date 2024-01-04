@@ -5,7 +5,7 @@
   font-weight: 400;
   --header-font-family: "Cabin Sketch", sans-serif;
   --main-white-color: rgba(255, 255, 255, 0.87);
-  --hover-color: #f8ca31;
+  --yellow-color: #fcd256;
   --background-color: #242424;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -23,7 +23,6 @@
 
 body {
   background-color: var(--background-color);
-  box-sizing: border-box;
   color: var(--main-white-color);
 }
 
@@ -41,11 +40,11 @@ h2 {
   font-family: var(--header-font-family);
   font-weight: lighter;
   font-size: 2rem;
-  margin: 0 auto 3rem auto;
+  margin: 0 auto 2rem auto;
 }
 .game-container {
   max-width: 46rem;
-  margin: 3rem auto;
+  margin: auto;
   padding: 2rem;
   border-top-left-radius: 225px 15px;
   border-top-right-radius: 225px 15px;
@@ -60,15 +59,14 @@ h2 {
   padding: 0;
   margin: 1rem 0;
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 2rem;
 }
 
-.players li {
+.player__list {
   display: flex;
   align-items: center;
-  width: 50%;
+  width: 100%;
   border-top-left-radius: 15px 255px;
   border-top-right-radius: 15px 255px;
   border-bottom-right-radius: 15px 255px;
@@ -76,14 +74,12 @@ h2 {
   box-shadow: 0 0 1px 1px var(--main-white-color);
 }
 
-.players li.active {
-  border-color: #f6e35a;
-  animation: pulse 2s infinite ease-in-out;
+.players li.player__list.active {
+  box-shadow: 0 0 1px 1px var(--yellow-color);
 }
 
-.players li.active .player-name,
-.players li.active .player-symbol {
-  color: #f6e35a;
+li.active .player-name {
+  color: var(--yellow-color);
 }
 
 .player--main--button {
@@ -107,13 +103,13 @@ h2 {
   padding: 0.5rem;
   border-radius: 4px;
   font-weight: bold;
+  flex: 1;
 }
 
 .player-name {
   display: inline-block;
   width: 6rem;
   font-size: 1rem;
-
   text-transform: uppercase;
   margin: 0;
   padding: 0.5rem;
@@ -219,8 +215,8 @@ ol {
   margin: 2rem auto;
   font-size: 1.5rem;
   background: none;
-  border: 2px solid #fcd256;
-  color: #fcd256;
+  border: 2px solid var(--yellow-color);
+  color: var(--yellow-color);
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
@@ -229,7 +225,7 @@ ol {
 }
 
 .game-over__button:hover {
-  background: #fcd256;
+  background: var(--yellow-color);
   color: #3f3b00;
   transform: scale(1.1);
   box-shadow: 0 0 20px rgba(255, 187, 0, 0.8);

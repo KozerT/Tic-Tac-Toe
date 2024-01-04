@@ -2,11 +2,10 @@ import { useState } from "react";
 import "./App.css";
 import GameBoard from "./components/GameBoard";
 import Player from "./components/Player";
-import Log from "./components/Log";
 import { WINNING_COMBINATIONS } from "./combinations";
 import GameOver from "./components/GameOver";
 
-function getActivePlayer(gameTurn) {
+const getActivePlayer = (gameTurn) => {
   let currentPlayer = "❌";
 
   if (gameTurn.length > 0 && gameTurn[0].player === "❌") {
@@ -14,32 +13,9 @@ function getActivePlayer(gameTurn) {
   }
 
   return currentPlayer;
-}
+};
 
-const initialGameBoardValue = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
-function App() {
-  const [gameTurn, setGameTurn] = useState([]);
-  const [players, setPlayers] = useState({
-    "❌": "Player1",
-    "⭕️": "Player2",
-  });
-
-  const activePlayer = getActivePlayer(gameTurn);
-
-  let gameBoard = [...initialGameBoardValue.map((array) => [...array])];
-
-  for (const turn of gameTurn) {
-    const { square, player } = turn;
-    const { row, col } = square;
-
-    gameBoard[row][col] = player;
-  }
-
+const getWinner = (gameBoard, players) => {
   let winner = null;
 
   for (const combination of WINNING_COMBINATIONS) {
@@ -58,6 +34,42 @@ function App() {
       winner = players[firstInputSymbol];
     }
   }
+  return winner;
+};
+
+const getGameBoard = (gameTurn) => {
+  let gameBoard = [...INITIAL_GAME_BOARD.map((array) => [...array])];
+
+  for (const turn of gameTurn) {
+    const { square, player } = turn;
+    const { row, col } = square;
+
+    gameBoard[row][col] = player;
+  }
+
+  return gameBoard;
+};
+
+const PLAYERS = {
+  "❌": "Player1",
+  "⭕️": "Player2",
+};
+
+const INITIAL_GAME_BOARD = [
+  [null, null, null],
+  [null, null, null],
+  [null, null, null],
+];
+
+function App() {
+  const [gameTurn, setGameTurn] = useState([]);
+  const [players, setPlayers] = useState(PLAYERS);
+
+  const activePlayer = getActivePlayer(gameTurn);
+
+  const gameBoard = getGameBoard(gameTurn);
+
+  const winner = getWinner(gameBoard, players);
 
   const gameDraw = gameTurn.length === 9 && !winner;
 
@@ -91,15 +103,15 @@ function App() {
       <h1>Tic-Tac-Toe</h1>
       <h2>The Ultimate Challenge</h2>
       <div id="game-container" className="game-container">
-        <ol id="players" className="players  ">
+        <ol id="players" className="players">
           <Player
-            name="Player 1"
+            name={PLAYERS["❌"]}
             symbol="❌"
             isACtive={activePlayer === "❌"}
             onChangeName={handlePlayerNameChange}
           />
           <Player
-            name="Player 2"
+            name={PLAYERS["⭕️"]}
             symbol="⭕️"
             isACtive={activePlayer === "⭕️"}
           />
@@ -113,7 +125,6 @@ function App() {
           activePlayerSymbol={activePlayer}
         />
       </div>
-      <Log turns={gameTurn} />
     </main>
   );
 }
