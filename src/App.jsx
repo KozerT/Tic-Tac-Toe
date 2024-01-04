@@ -4,18 +4,24 @@ import GameBoard from "./components/GameBoard";
 import Player from "./components/Player";
 import Log from "./components/Log";
 
+function getActivePlayer(gameTurn) {
+  let currentPlayer = "❌";
+
+  if (gameTurn.length > 0 && gameTurn[0].player === "❌") {
+    currentPlayer = "⭕️";
+  }
+
+  return currentPlayer;
+}
+
 function App() {
-  const [activePlayer, setActivePlayer] = useState("❌");
   const [gameTurn, setGameTurn] = useState([]);
 
-  const handleSelectInput = (rowIndex, colIndex) => {
-    setActivePlayer((curPlayer) => (curPlayer === "❌" ? "⭕️" : "❌"));
-    setGameTurn((prevTurn) => {
-      let currentPlayer = "❌";
+  const activePlayer = getActivePlayer(gameTurn);
 
-      if (prevTurn.length > 0 && prevTurn[0].player === "❌") {
-        currentPlayer = "⭕️";
-      }
+  const handleSelectInput = (rowIndex, colIndex) => {
+    setGameTurn((prevTurn) => {
+      const currentPlayer = getActivePlayer(prevTurn);
 
       const updatedTurns = [
         { square: { row: rowIndex, col: colIndex }, player: currentPlayer },
