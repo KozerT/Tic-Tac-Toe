@@ -24,10 +24,14 @@ const initialGameBoardValue = [
 
 function App() {
   const [gameTurn, setGameTurn] = useState([]);
+  const [players, setPlayers] = useState({
+    "❌": "Player1",
+    "⭕️": "Player2",
+  });
 
   const activePlayer = getActivePlayer(gameTurn);
 
-  let gameBoard = initialGameBoardValue;
+  let gameBoard = [...initialGameBoardValue.map((array) => [...array])];
 
   for (const turn of gameTurn) {
     const { square, player } = turn;
@@ -51,7 +55,7 @@ function App() {
       firstInputSymbol === secondInputSymbol &&
       firstInputSymbol === thirdInputSymbol
     ) {
-      winner = firstInputSymbol;
+      winner = players[firstInputSymbol];
     }
   }
 
@@ -70,6 +74,18 @@ function App() {
     });
   };
 
+  const handleRestart = () => {
+    setGameTurn([]);
+  };
+
+  const handlePlayerNameChange = (symbol, newName) => {
+    setPlayers((prev) => {
+      return {
+        ...prev,
+        [symbol]: newName,
+      };
+    });
+  };
   return (
     <main>
       <h1>Tic-Tac-Toe</h1>
@@ -80,6 +96,7 @@ function App() {
             name="Player 1"
             symbol="❌"
             isACtive={activePlayer === "❌"}
+            onChangeName={handlePlayerNameChange}
           />
           <Player
             name="Player 2"
@@ -87,7 +104,9 @@ function App() {
             isACtive={activePlayer === "⭕️"}
           />
         </ol>
-        {(winner || gameDraw) && <GameOver winner={winner} />}
+        {(winner || gameDraw) && (
+          <GameOver winner={winner} onRestart={handleRestart} />
+        )}
         <GameBoard
           onSelectInput={handleSelectInput}
           board={gameBoard}
